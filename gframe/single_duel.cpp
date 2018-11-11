@@ -1731,7 +1731,7 @@ void SingleDuel::GetResponse(DuelPlayer* dp, void* pdata, unsigned int len) {
 	players[dp->type]->state = 0xff;
 	if(host_info.time_limit) {
 		if (time_limit[dp->type] >= time_elapsed) {
-			int timedeplated = time_elapsed;
+			int timedeplated = time_elapsed-3;
 			if (time_limit[dp->type]-timedeplated<= host_info.time_limit) {
 				time_limit[dp->type] -= timedeplated;
 			}
