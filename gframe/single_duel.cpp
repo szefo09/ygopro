@@ -1731,7 +1731,7 @@ void SingleDuel::GetResponse(DuelPlayer* dp, void* pdata, unsigned int len) {
 	players[dp->type]->state = 0xff;
 	if(host_info.time_limit) {
 		if (time_limit[dp->type] >= time_elapsed) {
-			int timedeplated = time_elapsed-10;
+			int timedeplated = time_elapsed;
 			if (time_limit[dp->type]-timedeplated<= host_info.time_limit) {
 				time_limit[dp->type] -= timedeplated;
 			}
@@ -1838,7 +1838,7 @@ void SingleDuel::RequestField(DuelPlayer* dp) {
 	sctl.left_time = time_limit[1 - last_response];
 	NetServer::SendPacketToPlayer(dp, STOC_TIME_LIMIT, sctl);
 	sctl.player = last_response;
-	sctl.left_time = time_limit[last_response] - time_elapsed;
+	sctl.left_time = time_limit[last_response] - (3+time_elapsed);
 	NetServer::SendPacketToPlayer(dp, STOC_TIME_LIMIT, sctl);
 
 	NetServer::SendPacketToPlayer(dp, STOC_FIELD_FINISH);
