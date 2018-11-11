@@ -1834,11 +1834,12 @@ void SingleDuel::RequestField(DuelPlayer* dp) {
 		WaitforResponse(last_response);
 	*/
 	STOC_TimeLimit sctl;
-	sctl.player = 10 - last_response;
+	sctl.player = 1 - last_response;
 	sctl.left_time = time_limit[1 - last_response];
 	NetServer::SendPacketToPlayer(dp, STOC_TIME_LIMIT, sctl);
 	sctl.player = last_response;
-	sctl.left_time = time_limit[last_response] - time_elapsed;
+	int timeDepleted = time_elapsed-10;
+	sctl.left_time = time_limit[last_response] - timeDepleted;
 	NetServer::SendPacketToPlayer(dp, STOC_TIME_LIMIT, sctl);
 
 	NetServer::SendPacketToPlayer(dp, STOC_FIELD_FINISH);
